@@ -1,235 +1,443 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-<div class="" role="main">
-
-<!-- START TABLE 1 -->
-<div class="example-container mat-elevation-z0">
-    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z0">
-    <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
-      <mat-divider vertical style="height:36px; margin-right:4px"></mat-divider>
-      <ng-container mat-header-cell *matHeaderCellDef>
-          <th>
-            <label mat-sort-header>
-              <!-- {{column}} -->              
-            </label> 
-          </th>
-      </ng-container>
-      <td mat-cell *matCellDef="let element">
-        <!-- {{element[column]}} -->  
-        <label *ngIf="element[column] === element.name" mat-sort-header class="toBold">
-          <input matInput type="text" (input)="calcData()" [value]="element[column]" [(ngModel)]="element[column]">
-        </label> 
-        <label *ngIf="element[column] !== element.name" mat-sort-header>
-          <input matInput type="text" (input)="calcData()" [value]="element[column]" [(ngModel)]="element[column]">      
-        </label> 
-      </td>
-    </ng-container>
-
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-    <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-            <div *ngIf="element?.rate?.name" class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="example-element-diagram">
-                  <td mat-cell>
-                    <mat-form-field floatLabel="never" appearance="none">
-                      <input matInput placeholder="Value" [value]="element.rate.name" [(ngModel)]="element.rate.name">
-                    </mat-form-field>
-                  </td>
-                  <td mat-cell>
-                    <mat-form-field floatLabel="never" appearance="none">
-                      <input matInput placeholder="Value" [value]="element.rate.C" [(ngModel)]="element.rate.C">
-                    </mat-form-field>
-                  </td>
-                  <td mat-cell>
-                    <mat-form-field floatLabel="never" appearance="none">
-                      <input matInput placeholder="" [value]="element.rate.D" [(ngModel)]="element.rate.D">
-                    </mat-form-field>{{element.D}}
-                  </td>
-                  <td mat-cell>
-                    <mat-form-field floatLabel="never" appearance="none">
-                      <input matInput placeholder="" [value]="element.rate.E" [(ngModel)]="element.rate.E">
-                    </mat-form-field>
-                  </td>
-                  <td mat-cell>
-                    <mat-form-field floatLabel="never" appearance="none">
-                      <input matInput placeholder="" [value]="element.rate.F" [(ngModel)]="element.rate.F">
-                    </mat-form-field>
-                  </td>
-                  <td mat-cell>
-                    <mat-form-field floatLabel="never" appearance="none">
-                      <input matInput placeholder="" [value]="element.rate.G" [(ngModel)]="element.rate.G">
-                    </mat-form-field>
-                  </td>
-                </div>
-            </div>
-
-            <div *ngIf="element?.rate_per?.name" class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-              <div class="example-element-diagram">
-                <td mat-cell>
-                  <mat-form-field floatLabel="never" appearance="none">
-                    <input matInput placeholder="Value" [value]="element.rate_per.name" [(ngModel)]="element.rate_per.name">
-                  </mat-form-field>
-                </td>
-                <td mat-cell>
-                  <mat-form-field floatLabel="never" appearance="none">
-                    <input matInput placeholder="Value" [value]="element.rate_per.C" [(ngModel)]="element.rate_per.C">
-                  </mat-form-field>
-                </td>
-                <td mat-cell>
-                  <mat-form-field floatLabel="never" appearance="none">
-                    <input matInput placeholder="" [value]="element.rate_per.D" [(ngModel)]="element.rate_per.D">
-                  </mat-form-field>
-                </td>
-                <td mat-cell>
-                  <mat-form-field floatLabel="never" appearance="none">
-                    <input matInput placeholder="" [value]="element.rate_per.F" [(ngModel)]="element.rate_per.F">
-                  </mat-form-field>
-                </td>
-                <td mat-cell>
-                  <mat-form-field floatLabel="never" appearance="none">
-                    <input matInput placeholder="" [value]="element.rate_per.G" [(ngModel)]="element.rate_per.G">
-                  </mat-form-field>
-                </td>              
-              </div>
-          </div>
-
-          <div *ngIf="element?.minimum?.name" class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-            <div class="example-element-diagram">
-              <td mat-cell>
-                <mat-form-field floatLabel="never" appearance="none">
-                  <input matInput placeholder="Value" [value]="element.minimum.name" [(ngModel)]="element.minimum.name">
-                </mat-form-field>
-              </td>
-              <td mat-cell>
-                <mat-form-field floatLabel="never" appearance="none">
-                  <mat-select [(value)]="element.minimum.C" placeholder="50%">
-                    <mat-option value="5">5%</mat-option>
-                    <mat-option value="10">10%</mat-option>
-                    <mat-option value="15">15%</mat-option>
-                    <mat-option value="20">20%</mat-option>
-                    <mat-option value="25">25%</mat-option>
-                    <mat-option value="30">30%</mat-option>
-                    <mat-option value="35">35%</mat-option>
-                    <mat-option value="40">40%</mat-option>
-                    <mat-option value="45">45%</mat-option>
-                    <mat-option value="50">50%</mat-option>
-                    <mat-option value="55">55%</mat-option>
-                    <mat-option value="60">60%</mat-option>
-                    <mat-option value="65">55%</mat-option>
-                    <mat-option value="70">70%</mat-option>
-                    <mat-option value="75">75%</mat-option>
-                    <mat-option value="80">80%</mat-option>
-                    <mat-option value="85">85%</mat-option>
-                    <mat-option value="90">90%</mat-option>
-                    <mat-option value="95">95%</mat-option>
-                    <mat-option value="100">100%</mat-option>
-                    <mat-option value="na">N/A</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-              <td mat-cell>
-                <mat-form-field floatLabel="never" appearance="none">
-                  <mat-select [(value)]="element.minimum.D" placeholder="50%">
-                    <mat-option value="5">5%</mat-option>
-                    <mat-option value="10">10%</mat-option>
-                    <mat-option value="15">15%</mat-option>
-                    <mat-option value="20">20%</mat-option>
-                    <mat-option value="25">25%</mat-option>
-                    <mat-option value="30">30%</mat-option>
-                    <mat-option value="35">35%</mat-option>
-                    <mat-option value="40">40%</mat-option>
-                    <mat-option value="45">45%</mat-option>
-                    <mat-option value="50">50%</mat-option>
-                    <mat-option value="55">55%</mat-option>
-                    <mat-option value="60">60%</mat-option>
-                    <mat-option value="65">55%</mat-option>
-                    <mat-option value="70">70%</mat-option>
-                    <mat-option value="75">75%</mat-option>
-                    <mat-option value="80">80%</mat-option>
-                    <mat-option value="85">85%</mat-option>
-                    <mat-option value="90">90%</mat-option>
-                    <mat-option value="95">95%</mat-option>
-                    <mat-option value="100">100%</mat-option>
-                    <mat-option value="na">N/A</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-              <td mat-cell>
-                <mat-form-field floatLabel="never" appearance="none">
-                  <mat-select [(value)]="element.minimum.F" placeholder="50%">
-                    <mat-option value="5">5%</mat-option>
-                    <mat-option value="10">10%</mat-option>
-                    <mat-option value="15">15%</mat-option>
-                    <mat-option value="20">20%</mat-option>
-                    <mat-option value="25">25%</mat-option>
-                    <mat-option value="30">30%</mat-option>
-                    <mat-option value="35">35%</mat-option>
-                    <mat-option value="40">40%</mat-option>
-                    <mat-option value="45">45%</mat-option>
-                    <mat-option value="50">50%</mat-option>
-                    <mat-option value="55">55%</mat-option>
-                    <mat-option value="60">60%</mat-option>
-                    <mat-option value="65">55%</mat-option>
-                    <mat-option value="70">70%</mat-option>
-                    <mat-option value="75">75%</mat-option>
-                    <mat-option value="80">80%</mat-option>
-                    <mat-option value="85">85%</mat-option>
-                    <mat-option value="90">90%</mat-option>
-                    <mat-option value="95">95%</mat-option>
-                    <mat-option value="100">100%</mat-option>
-                    <mat-option value="na">N/A</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-              <td mat-cell>
-              <mat-form-field floatLabel="never" appearance="none">
-                <mat-select [(value)]="element.minimum.G" placeholder="50%">
-                  <mat-option value="5">5%</mat-option>
-                  <mat-option value="10">10%</mat-option>
-                  <mat-option value="15">15%</mat-option>
-                  <mat-option value="20">20%</mat-option>
-                  <mat-option value="25">25%</mat-option>
-                  <mat-option value="30">30%</mat-option>
-                  <mat-option value="35">35%</mat-option>
-                  <mat-option value="40">40%</mat-option>
-                  <mat-option value="45">45%</mat-option>
-                  <mat-option value="50">50%</mat-option>
-                  <mat-option value="55">55%</mat-option>
-                  <mat-option value="60">60%</mat-option>
-                  <mat-option value="65">55%</mat-option>
-                  <mat-option value="70">70%</mat-option>
-                  <mat-option value="75">75%</mat-option>
-                  <mat-option value="80">80%</mat-option>
-                  <mat-option value="85">85%</mat-option>
-                  <mat-option value="90">90%</mat-option>
-                  <mat-option value="95">95%</mat-option>
-                  <mat-option value="100">100%</mat-option>
-                  <mat-option value="na">N/A</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </div>
-        </div>
-      </td>
-    </ng-container>
-
-    <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
-    <tr mat-row *matRowDef="let element; columns: displayedColumns;" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element" class="example-element-row">
-    </tr>
-    <tr mat-row *matRowDef="let element; columns: ['expandedDetail']" class="example-detail-row"></tr>
-
-  </table>
-
-<!-- END TABLE 1 -->  
-  <ng-container>
-    <div fxLayout="row" fxLayoutAlign="center center" style="width: 100vw; height: 10vh;">
-      <div layout="row" layout-align="center" flex="15">
-         <button matSuffix mat-stroked-button color="success" (click)="saveDatatable()" style="margin-right:10px">
-          Save
-        </button>
-      </div>
+<body>
+    <h2 style="text-align: center;">Expense Details</h2>
+    <div style="overflow-x:auto;">
+        <ng-container id="header">
+            <table id="mainTable" style="float:left">
+                <tr>
+                    <th></th>
+                    <th>Totals (Excl GC/OCP)</th>
+                    <th>MA WC Alloc</th>
+                    <th>FL WC Alloc</th>
+                    <th>All Other Expenses</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Workup #</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>LOB</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Workers Compensation</td>
+                    <td>Workers Compensation</td>
+                </tr>
+                <tr>
+                    <td>Segment Entity Name</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>WC Deductible / Retro</td>
+                    <td>WC SIR</td>
+                </tr>
+                <tr>
+                    <td>Primary Layer Limit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>4000000</td>
+                    <td>500000</td>
+                </tr>
+                <tr>
+                    <td>Occurence Limit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Statutory</td>
+                    <td>Statutory</td>
+                </tr>
+                <tr>
+                    <td>Exposure</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>13906336666</td>
+                    <td>322006366</td>
+                </tr>
+                <tr>
+                    <td>Exposure Type</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>WC Payroll</td>
+                    <td>WC Payroll</td>
+                </tr>
+                <tr>
+                    <td>Sub-Type</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Countrywide</td>
+                    <td>Countrywide</td>
+                </tr>
+                <tr>
+                    <td>State Exception</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>FL</td>
+                    <td>PA</td>
+                </tr>
+                <tr>
+                    <td>Coverage</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Plan</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Losspick@250000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1000000</td>
+                    <td>2000000</td>
+                </tr>
+                <ng-container>
+                    <tr class="excess" (click)="excessExpanded = !excessExpanded">
+                        <td> {{ excessExpanded ? '&ndash;' : '+'}} Excess Premium (System Allocated)</td>
+                        <td id="excessAllocation">1870537</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="excessExpanded">
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Excess Premium (UW Selected)</td>
+                            <td><input id="excessUW" #name type="text" name="col1" class="col1" length="20" placeholder="0" [(ngModel)]="excessUW" required (keyup)="onExcessUWChange(excessUW)" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" placeholder="0" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" placeholder="0" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" placeholder="0" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" placeholder="0" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" placeholder="0" /></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Excess Premium (Variance)</td>
+                            <td>{{excessVariance}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Excess Premium (Variance %)</td>
+                            <td>{{excessVariancePercentage}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container>
+                    <tr class="aggIns" (click)="aggInsuranceExpanded = !aggInsuranceExpanded">
+                        <td> {{ aggInsuranceExpanded ? '&ndash;' : '+'}} Aggregate Insurance Charge (System Allocated)</td>
+                        <td id="aggInsAllocation">12000000</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="aggInsuranceExpanded">
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Aggregate Insurance Charge (UW Selected)</td>
+                            <td><input id="aggInsUW" #name type="text" name="col1" class="col1" length="20" placeholder="0" [(ngModel)]="aggInsUW" required (keyup)="onAggInsuranceUWChange(aggInsUW)" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Aggregate Insurance Charge (Variance)</td>
+                            <td>{{aggInsVariance}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Aggregate Insurance Charge (Variance %)</td>
+                            <td>{{aggInsVariancePercentage}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container>
+                    <tr class="excess" (click)="gaExpanded = !gaExpanded">
+                        <td> {{ gaExpanded ? '&ndash;' : '+'}} General & Administration (System Allocated)</td>
+                        <td id="gaAllocation"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="gaExpanded">
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;General & Administration (UW Selected)</td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;General & Administration (Variance)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;General & Administration (Variance %)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container>
+                    <tr class="excess" (click)="claimsExpanded = !claimsExpanded">
+                        <td> {{ claimsExpanded ? '&ndash;' : '+'}} Claims Supervision (System Allocated)</td>
+                        <td id="claimsAllocation"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="claimsExpanded">
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Claims Supervision (UW Selected)</td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Claims Supervision (Variance)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Claims Supervision (Variance %)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container>
+                    <tr class="excess" (click)="intelExpanded = !intelExpanded">
+                        <td> {{ intelExpanded ? '&ndash;' : '+'}} Intellirisk (System Allocated)</td>
+                        <td id="intelAllocation"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="intelExpanded">
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Intellirisk (UW Selected)</td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Intellirisk (Variance)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Intellirisk (Variance %)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container>
+                    <tr class="excess" (click)="basicExpanded = !basicExpanded">
+                        <td> {{ basicExpanded ? '&ndash;' : '+'}} Basic Loss Control (System Allocated)</td>
+                        <td id="basicAllocation"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="basicExpanded">
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Basic Loss Control (UW Selected)</td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Basic Loss Control (Variance)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Basic Loss Control (Variance %)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container>
+                    <tr class="excess" (click)="captiveExpanded = !captiveExpanded">
+                        <td> {{ captiveExpanded ? '&ndash;' : '+'}} Captive Management Fee (System Allocated)</td>
+                        <td id="captiveAllocation"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="captiveExpanded">
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Captive Management Fee (UW Selected)</td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                            <td><input type="text" name="col1" class="col1" length="20" /></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Captive Management Fee (Variance)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="excess">
+                            <td>&nbsp;&nbsp;&nbsp;Captive Management Fee (Variance %)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container>
+                    <tr class="totals" (click)="totalExpanded = !totalExpanded">
+                        <td> {{ totalExpanded ? '&ndash;' : '+'}} Gen Expense Total</td>
+                        <td>{{ totalPremium }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <ng-container *ngIf="totalExpanded">
+                        <tr class="totals">
+                            <td>&nbsp;&nbsp;&nbsp;Total Gen Expense (UW Selected)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="totals">
+                            <td>&nbsp;&nbsp;&nbsp;Total Gen Expense (Variance)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </table>
+        </ng-container>
     </div>
-  </ng-container>
 
-</div>
-
-<router-outlet></router-outlet>
+    <button type="button" class="btn btn-outline-secondary"> Submit / Save </button>
+</body>
